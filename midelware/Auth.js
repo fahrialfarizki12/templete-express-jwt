@@ -15,6 +15,8 @@ const AuthToken = (req, res, next) => {
   try {
     const decode = jwt.verify(token, secret);
     req.cekValid = decode;
+    const username = req.cekValid.username;
+    res.status(201).json({username})
     next()
   } catch (e) {
     return res.status(403).json({ message: "Token tidak valid atau kedaluwarsa" });
